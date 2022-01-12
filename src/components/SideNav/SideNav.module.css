@@ -1,0 +1,39 @@
+.sideNav {
+  position: relative;
+  height: 100%;
+  width: 250px;
+  background-color: #eef3f0;
+  border-radius: 25px 0px 0px 25px;
+  overflow-y: auto;
+}
+
+.selected {
+  font-family: AvenirNextDemiBold;
+  background-color: #279d84;
+  color: #fcfcfc;
+}
+
+.navButton {
+  text-align: center;
+}
+
+.allTasks {
+  width: 75%;
+  padding: 10px;
+  font-size: 24px;
+  border-radius: 0px 25px 25px 0px;
+  margin-left: -3px;
+  margin-top: 35px;
+}
+
+.logout {
+  font-family: AvenirNextDemiBold;
+  cursor: pointer;
+  padding: 10px 10px 10px 0px;
+  position: absolute;
+  bottom: 40px;
+  border-radius: 0px 25px 25px 0px;
+  width: 75%;
+  background-color: #fcfcfc;
+  text-align: center;
+}

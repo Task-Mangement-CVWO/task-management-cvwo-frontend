@@ -1,0 +1,14 @@
+.selected {
+  background-color: #279d84;
+  color: #fcfcfc;
+  border-radius: 0px 25px 25px 0px;
+}
+.navButton {
+  cursor: pointer;
+  padding: 10px 0px 7px 82px;
+  list-style: none;
+  margin-left: -43px;
+  text-align: left;
+  width: 50%;
+  margin-bottom: 5px;
+}

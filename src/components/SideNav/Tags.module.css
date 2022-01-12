@@ -1,0 +1,10 @@
+.tagContainer {
+  height: 70%;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.tagContainer::-webkit-scrollbar {
+  display: none;
+}
