@@ -1,0 +1,17 @@
+.taskView {
+  width: 80%;
+  height: 100%;
+  margin-left: 260px;
+}
+
+.taskCards {
+  display: flex;
+  height: 79%;
+  justify-content: center;
+}
+
+.createTask {
+  width: 100%;
+  height: 150px;
+  background-color: burlywood;
+}

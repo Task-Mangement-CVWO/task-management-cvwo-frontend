@@ -4,4 +4,6 @@
   border: 3px solid #eef3f0;
   border-left-style: none;
   border-radius: 29px;
+  min-width: 1300px;
+  min-height: 710px;
 }

@@ -5,6 +5,7 @@
   background-color: #eef3f0;
   border-radius: 25px 0px 0px 25px;
   overflow-y: auto;
+  float: left;
 }
 
 .selected {

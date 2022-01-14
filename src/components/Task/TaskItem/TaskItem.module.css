@@ -1,0 +1,40 @@
+.container {
+  width: 200px;
+  background-color: #fcfcfc;
+  min-height: 40px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 15px 0px 5px 25px;
+  border-radius: 15px;
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.container p {
+  font-family: AvenirNextRegular;
+}
+
+.container label {
+  font-size: 12px;
+}
+
+.tags {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.delete {
+  position: absolute;
+  background-color: #e7cdae;
+  color: #703c00;
+  border-radius: 50%;
+  right: -3px;
+  top: -3px;
+  height: 15px;
+  width: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
