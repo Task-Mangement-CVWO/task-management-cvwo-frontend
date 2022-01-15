@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  min-height: 75px;
+  border-radius: 5px;
+  background-color: #fcfcfc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.container p {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #703c00;
+  margin: 0;
+}
+
+.tags {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
