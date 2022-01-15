@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { isPropertySignature } from 'typescript';
-import classes from './Modal.module.css';
+import classes from './AddTaskModal.module.css';
 
 const Backdrop: React.FC<{ onCancel: () => void }> = props => {
   return <div onClick={props.onCancel} className={classes.backdrop}></div>;
@@ -17,7 +16,7 @@ const ModalOverlay: React.FC = props => {
 
 const portalElement = document.getElementById('overlays');
 
-const Modal: React.FC<{ onCancel: () => void }> = props => {
+const AddTaskModal: React.FC<{ onCancel: () => void }> = props => {
   return (
     <Fragment>
       {portalElement && ReactDOM.createPortal(<Backdrop onCancel={props.onCancel} />, portalElement)}
@@ -26,4 +25,4 @@ const Modal: React.FC<{ onCancel: () => void }> = props => {
   );
 };
 
-export default Modal;
+export default AddTaskModal;

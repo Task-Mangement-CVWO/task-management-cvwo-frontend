@@ -1,0 +1,48 @@
+.addTagForm input[type='text'] {
+  width: 93%;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.addTagForm input[type='text']:focus {
+  outline: none;
+}
+
+.submitForm {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitForm button {
+  cursor: pointer;
+  margin: 5px;
+  width: 130px;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.add {
+  color: #fcfcfc;
+  background-color: #703c00;
+  border: 1px solid #703c00;
+}
+
+.add:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.cancel {
+  color: #703c00;
+  background-color: #fcfcfc;
+  border: 1px solid #703c00;
+}
+
+.cancel:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
