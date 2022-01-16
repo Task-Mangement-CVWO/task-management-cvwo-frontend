@@ -1,0 +1,53 @@
+@font-face {
+  font-family: AvenirNextDemiBold;
+  src: url('../../../public/fonts/AvenirNext-DemiBold.ttf');
+}
+@font-face {
+  font-family: AvenirNextRegular;
+  src: url('../../../public/fonts/AvenirNextLTPro-Regular.otf') format('opentype');
+}
+
+body {
+  background-color: #fcfcfc;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  background-color: #eef3f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  font-family: AvenirNextRegular;
+  width: 350px;
+}
+
+.form a {
+  color: black;
+}
+
+.submitForm {
+  width: 100%;
+  text-align: center;
+}
+
+.submitForm p {
+  font-size: 12px;
+}
+
+.form h1 {
+  text-align: center;
+  font-family: AvenirNextDemiBold;
+  font-size: 48px;
+  margin: 0;
+}
