@@ -1,0 +1,41 @@
+@font-face {
+  font-family: AvenirNextRegular;
+  src: url('../../../../public/fonts/AvenirNextLTPro-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: AvenirNextDemiBold;
+  src: url('../../../../public/fonts/AvenirNext-DemiBold.ttf');
+}
+
+.notification {
+  font-family: AvenirNextRegular;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 3rem;
+  background-color: #1a8ed1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 10%;
+  align-items: center;
+  color: white;
+}
+
+.notification h2 {
+  font-family: AvenirNextDemiBold;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.notification p {
+  font-size: 1rem;
+}
+
+.error {
+  background-color: #690000;
+}
+
+.success {
+  background-color: #1ad1b9;
+}

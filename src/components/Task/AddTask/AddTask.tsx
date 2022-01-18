@@ -1,5 +1,5 @@
 import React from 'react';
-import AddTaskModal from '../../UI/MainBody/Modal/AddTaskModal';
+import AddTaskModal from '../../UI/Modal/AddTaskModal';
 import ChooseTag from './ChooseTag';
 import classes from './AddTask.module.css';
 

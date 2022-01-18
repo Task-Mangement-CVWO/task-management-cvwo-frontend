@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Routes from '../../utilities/routes';
 import Home from '../../pages/Home/Home';
-import Login from '../../pages/Home/auth/Login';
-import Signup from '../../pages/Home/auth/Signup';
+import Login from '../../pages/auth/Login';
+import Signup from '../../pages/auth/Signup';
 
 const AppRouter = () => {
   return (

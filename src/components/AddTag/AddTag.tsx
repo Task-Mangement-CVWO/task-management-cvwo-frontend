@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './AddTag.module.css';
-import AddTagModal from '../UI/MainBody/Modal/AddTagModal';
+import AddTagModal from '../UI/Modal/AddTagModal';
 
 const AddTag: React.FC<{ onCancel: () => void }> = props => {
   return (

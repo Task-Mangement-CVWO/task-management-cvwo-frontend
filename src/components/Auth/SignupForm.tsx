@@ -9,10 +9,14 @@ const SignupForm = () => {
   const handleClick = () => {
     history.push('/user/login');
   };
+  const handelSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log('Signing Up');
+  };
   return (
     <div className={classes.container}>
       <div className={classes.form}>
-        <form>
+        <form onSubmit={handelSubmit}>
           <h1>Register</h1>
           <AuthInput label='Username' />
           <AuthInput label='Password' />

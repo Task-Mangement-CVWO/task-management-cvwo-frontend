@@ -1,18 +1,25 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+
 import AuthInput from './AuthInput/AuthInput';
 import AuthFormBtn from './AuthFormBtn/AuthFormBtn';
 import classes from './LoginForm.module.css';
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const history = useHistory();
   const handleClick = () => {
     history.push('/user/signup');
   };
+
+  const handelSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    console.log('Signing In');
+  };
   return (
     <div className={classes.container}>
       <div className={classes.form}>
-        <form>
+        <form onSubmit={handelSubmit}>
           <h1>Welcome!</h1>
           <AuthInput label='Username' />
           <AuthInput label='Password' />
