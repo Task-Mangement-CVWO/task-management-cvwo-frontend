@@ -11,6 +11,7 @@ const Tags: React.FC<{
     updated_at?: string;
   }[];
 }> = props => {
+  console.log(props.items);
   return (
     <div className={classes.tagContainer}>
       <ul>
