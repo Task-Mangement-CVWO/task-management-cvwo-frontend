@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useEffect, useState } from 'react';
 import AddTaskButton from '../AddTaskButton/AddTaskButton';
 import Search from '../Search/Search';
@@ -22,6 +23,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
   const [sortBy, setSortBy] = useState<string>('');
+  const [searchInput, setSearchInput] = useState<string>('');
 
   const filteredTasks = taskTagItems.filter(item => filters.includes(item.tag_id || -1));
   const filteredTaskIds = filteredTasks.map(item => item.task_id);
@@ -35,8 +37,15 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
   inProgressArray = _.sortBy(inProgressArray, [sortKey]);
   completedArray = _.sortBy(completedArray, [sortKey]);
 
+  toDoArray = toDoArray.filter(item => item.title!.toUpperCase().includes(searchInput.toUpperCase()));
+  inProgressArray = inProgressArray.filter(item => item.title!.toUpperCase().includes(searchInput.toUpperCase()));
+  completedArray = completedArray.filter(item => item.title!.toUpperCase().includes(searchInput.toUpperCase()));
+
   const handelSortBy = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(event.target.value);
+  };
+  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
   };
 
   const getTasks = async () => {
@@ -94,7 +103,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
         <p>All Tasks</p>
         <div className={classes.addAndSearch}>
           <AddTaskButton onShowAddTask={props.onShowAddTask} />
-          <Search />
+          <Search value={searchInput} onChange={handleSearchInput} />
           <select onChange={handelSortBy}>
             <option selected disabled hidden>
               Sort
