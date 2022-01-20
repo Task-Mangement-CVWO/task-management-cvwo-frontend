@@ -6,9 +6,12 @@ import classes from './AddTask.module.css';
 const AddTask: React.FC<{ onCancel: () => void }> = props => {
   let currentDate = new Date().toISOString().replace('Z', '');
   currentDate = currentDate.substring(0, currentDate.indexOf('.') - 3);
+  const onSubmitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+  };
   return (
     <AddTaskModal onCancel={props.onCancel}>
-      <form className={classes.addTaskForm}>
+      <form onSubmit={onSubmitHandler} className={classes.addTaskForm}>
         <label>Task</label>
         <input type='text' />
         <label>Description</label>

@@ -83,6 +83,13 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
         <div className={classes.addAndSearch}>
           <AddTaskButton onShowAddTask={props.onShowAddTask} />
           <Search />
+          <select>
+            <option selected disabled hidden>
+              Sort
+            </option>
+            <option value='dueDate'>By Due Date</option>
+            <option value='title'>By Title</option>
+          </select>
         </div>
       </div>
       <div className={classes.taskCards}>

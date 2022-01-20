@@ -26,3 +26,11 @@
 .addAndSearch {
   display: flex;
 }
+
+.addAndSearch select {
+  margin-top: 18px;
+  margin-left: 20px;
+  padding: 10px;
+  height: 40px;
+  border-radius: 20px;
+}
