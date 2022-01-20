@@ -48,6 +48,12 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
     setSearchInput(event.target.value);
   };
 
+  const convertISODate = (isoString: string) => {
+    const date = moment(isoString);
+    const dateString = date.format('ddd D/MM @ hh:mm A');
+    return dateString;
+  };
+
   const getTasks = async () => {
     const response = await fetch(Routes.url + '/tasks', {
       method: 'GET',
@@ -91,12 +97,6 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
     })();
   }, [callUpdate]);
 
-  const convertISODate = (isoString: string) => {
-    const date = moment(isoString);
-    const dateString = date.format('ddd D/MM @ hh:mm A');
-    return dateString;
-  };
-
   return (
     <div className={classes.taskView}>
       <div className={classes.createTask}>
@@ -104,8 +104,8 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
         <div className={classes.addAndSearch}>
           <AddTaskButton onShowAddTask={props.onShowAddTask} />
           <Search value={searchInput} onChange={handleSearchInput} />
-          <select onChange={handelSortBy}>
-            <option selected disabled hidden>
+          <select defaultValue='' onChange={handelSortBy}>
+            <option value='' disabled hidden>
               Sort
             </option>
             <option value='dueDate'>By Due Date</option>

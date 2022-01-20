@@ -14,7 +14,6 @@ const Tags: React.FC<{
 }> = props => {
   let tags = props.items;
   tags = _.sortBy(tags, ['title']);
-  console.log(props.items);
   return (
     <div className={classes.tagContainer}>
       <ul>

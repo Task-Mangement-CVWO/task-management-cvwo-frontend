@@ -45,18 +45,28 @@ const SignupForm = () => {
 
   const handelSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const isPasswordMatch = passwordInput === confirmPasswordInput;
     dispatch(uiActions.showNotification({ status: 'pending', message: 'Signing Up...', title: 'Pending' }));
+    if (usernameInput.trim().length == 0 || passwordInput.trim().length == 0 || confirmPasswordInput.trim().length == 0) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be empty', title: 'Error' }));
+      return;
+    }
+    if (!isPasswordMatch) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Passwords do not match', title: 'Error' }));
+      return;
+    }
+
     const response = await signUp(usernameInput, passwordInput, confirmPasswordInput);
-    if (response.ok) {
-      dispatch(uiActions.showNotification({ status: 'success', message: 'Successfully Signed Up', title: 'Success' }));
-      setUsernameInput('');
-      setPasswordInput('');
-      setConfirmPasswordInput('');
-    } else {
+    if (!response.ok) {
       type error = { message: string };
       const data = (await response.json()) as unknown as error;
       dispatch(uiActions.showNotification({ status: 'error', message: data.message, title: 'Error' }));
     }
+
+    setUsernameInput('');
+    setPasswordInput('');
+    setConfirmPasswordInput('');
+    dispatch(uiActions.showNotification({ status: 'success', message: 'Successfully Signed Up', title: 'Success' }));
   };
   return (
     <div className={classes.container}>

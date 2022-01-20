@@ -20,21 +20,6 @@ const TagItem: React.FC<{ title: string; tag_id: { id: number } }> = props => {
 
   let filtersArr = [...filters];
 
-  const setActiveHandler = () => {
-    if (isEditable) {
-      return;
-    }
-    setIsActive(state => !state);
-    if (!filtersArr.includes(props.tag_id.id) && !isActive) {
-      filtersArr.push(props.tag_id.id);
-      dispatch(taskActions.updateFilters({ data: filtersArr }));
-    }
-    if (isActive) {
-      filtersArr = [...filtersArr.filter(e => e !== props.tag_id.id)];
-      dispatch(taskActions.updateFilters({ data: filtersArr }));
-    }
-  };
-
   const deleteTag = async (id: number) => {
     const response = await fetch(Routes.url + '/tags/' + id.toString(), {
       method: 'DELETE',
@@ -60,6 +45,21 @@ const TagItem: React.FC<{ title: string; tag_id: { id: number } }> = props => {
     return response;
   };
 
+  const setActiveHandler = () => {
+    if (isEditable) {
+      return;
+    }
+    setIsActive(state => !state);
+    if (!filtersArr.includes(props.tag_id.id) && !isActive) {
+      filtersArr.push(props.tag_id.id);
+      dispatch(taskActions.updateFilters({ data: filtersArr }));
+    }
+    if (isActive) {
+      filtersArr = [...filtersArr.filter(e => e !== props.tag_id.id)];
+      dispatch(taskActions.updateFilters({ data: filtersArr }));
+    }
+  };
+
   const deleteHandler = async () => {
     dispatch(uiActions.showNotification({ status: 'pending', message: 'Deleting...', title: 'Pending' }));
     const response = await deleteTag(props.tag_id.id);
@@ -77,6 +77,14 @@ const TagItem: React.FC<{ title: string; tag_id: { id: number } }> = props => {
   const editTask = async () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const newTagTitle = tagInputText.current!.value;
+    if (newTagTitle.trim().length == 0) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be empty', title: 'Error' }));
+      return;
+    }
+    if (newTagTitle.trim().length > 10) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Input must be less than 11 Characters', title: 'Error' }));
+      return;
+    }
     setTagTitle(newTagTitle);
     setIsEditable(false);
     const response = await editTag(newTagTitle, props.tag_id.id);

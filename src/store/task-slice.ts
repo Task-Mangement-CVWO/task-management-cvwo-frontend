@@ -27,6 +27,7 @@ interface SliceState {
     updated_at?: string;
   }[];
   filters: number[];
+  addTaskTags: number[];
   callUpdate: {
     isUpdate: boolean;
     isTagDelete: boolean;
@@ -65,6 +66,7 @@ const initialState: SliceState = {
     },
   ],
   filters: [],
+  addTaskTags: [],
   callUpdate: {
     isUpdate: false,
     isTagDelete: false,
@@ -86,6 +88,9 @@ const taskSlice = createSlice({
     },
     updateFilters(state, action) {
       state.filters = action.payload.data;
+    },
+    updateAddTaskTags(state, action) {
+      state.addTaskTags = action.payload.data;
     },
     callUpdate(state, action) {
       state.callUpdate = action.payload.data;

@@ -8,9 +8,8 @@ import { uiActions } from '../../store/ui-slice';
 import { taskActions } from '../../store/task-slice';
 
 const AddTag: React.FC<{ onCancel: () => void }> = props => {
-  const tagInputText = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
-
+  const tagInputText = useRef<HTMLInputElement>(null);
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
   const addTag = async (title: string) => {
     const response = await fetch(Routes.url + '/tags', {
@@ -30,6 +29,10 @@ const AddTag: React.FC<{ onCancel: () => void }> = props => {
     dispatch(uiActions.showNotification({ status: 'pending', message: 'Adding...', title: 'Pending' }));
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const title = tagInputText.current!.value;
+    if (title.trim().length == 0) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be empty', title: 'Error' }));
+      return;
+    }
     const response = await addTag(title);
     if (!response.ok) {
       type error = { message: string };

@@ -44,18 +44,24 @@ const LoginForm: React.FC = () => {
   const handelSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(uiActions.showNotification({ status: 'pending', message: 'Logging In...', title: 'Pending' }));
+    if (usernameInput.trim().length == 0 || passwordInput.trim().length == 0) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be empty', title: 'Error' }));
+      return;
+    }
+
     const response = await login(usernameInput, passwordInput);
-    if (response.ok) {
-      dispatch(uiActions.showNotification({ status: 'success', message: 'Successfully Logged In', title: 'Success' }));
-      type success = { data: { accessToken: string } };
-      const data = (await response.json()) as unknown as success;
-      dispatch(authActions.login({ accessToken: data.data.accessToken }));
-      history.push('/home');
-    } else {
+    if (!response.ok) {
       type error = { message: string };
       const data = (await response.json()) as unknown as error;
+      setPasswordInput('');
       dispatch(uiActions.showNotification({ status: 'error', message: data.message, title: 'Error' }));
     }
+
+    type success = { data: { accessToken: string } };
+    const data = (await response.json()) as unknown as success;
+    dispatch(authActions.login({ accessToken: data.data.accessToken }));
+    history.push('/home');
+    dispatch(uiActions.showNotification({ status: 'success', message: 'Successfully Logged In', title: 'Success' }));
   };
 
   return (
