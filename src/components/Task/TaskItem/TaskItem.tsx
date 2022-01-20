@@ -11,6 +11,7 @@ const TaskItem: React.FC<{
   title: string;
   description: string;
   task_id: { id: number };
+  due_date: string;
   task_tags: {
     id?: number;
     user_id?: number;
@@ -67,6 +68,7 @@ const TaskItem: React.FC<{
           <TagItem key={item.id} title={props.tags.filter(tagItem => tagItem.id == item.tag_id)[0].title || ''} />
         ))}
       </div>
+      <div className={classes.dateTime}>{props.due_date}</div>
     </li>
   );
 };

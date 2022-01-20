@@ -5,6 +5,7 @@ import TaskCard from './TaskCard';
 import TaskItem from './TaskItem/TaskItem';
 import classes from './TaskView.module.css';
 import Routes from '../../utilities/routes';
+import moment from 'moment';
 
 import { RootState } from '../../store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,6 +70,12 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
     })();
   }, [callUpdate]);
 
+  const convertISODate = (isoString: string) => {
+    const date = moment(isoString);
+    const dateString = date.format('ddd D/MM @ hh:mm A');
+    return dateString;
+  };
+
   return (
     <div className={classes.taskView}>
       <div className={classes.createTask}>
@@ -83,6 +90,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
           {toDoArray.map(item => (
             <TaskItem
               key={item.id}
+              due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
@@ -96,6 +104,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
           {inProgressArray.map(item => (
             <TaskItem
               key={item.id}
+              due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
@@ -108,6 +117,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
           {completedArray.map(item => (
             <TaskItem
               key={item.id}
+              due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
