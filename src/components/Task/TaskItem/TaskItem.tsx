@@ -51,7 +51,7 @@ const TaskItem: React.FC<{
       return;
     }
     dispatch(uiActions.showNotification({ status: 'success', message: 'Data Successfully Deleted', title: 'Success' }));
-    dispatch(taskActions.callUpdate());
+    dispatch(taskActions.callUpdate({ data: { isUpdate: true, isTagDelete: false } }));
     return;
   };
 

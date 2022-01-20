@@ -5,10 +5,13 @@
 }
 .navButton {
   cursor: pointer;
-  padding: 10px 0px 7px 82px;
+  padding: 10px 0px 7px 50px;
   list-style: none;
   margin-left: -43px;
   text-align: left;
-  width: 50%;
+  width: 65%;
   margin-bottom: 5px;
+}
+.delete:hover {
+  color: red;
 }

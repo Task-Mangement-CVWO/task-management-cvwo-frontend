@@ -53,10 +53,17 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
       console.log('Calling Update');
       const tagResponse = await getTags();
       const tagData = await tagResponse.json();
-      dispatch(taskActions.updateTags({ data: tagData.data }));
 
       const taskResponse = await getTasks();
       const taskData = await taskResponse.json();
+
+      if (callUpdate.isTagDelete) {
+        dispatch(taskActions.updateTasks({ data: taskData.data }));
+        dispatch(taskActions.updateTaskTags({ data: taskData.tag }));
+        dispatch(taskActions.updateTags({ data: tagData.data }));
+        return;
+      }
+      dispatch(taskActions.updateTags({ data: tagData.data }));
       dispatch(taskActions.updateTasks({ data: taskData.data }));
       dispatch(taskActions.updateTaskTags({ data: taskData.tag }));
     })();
