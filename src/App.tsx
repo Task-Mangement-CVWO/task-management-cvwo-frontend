@@ -1,13 +1,21 @@
-import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Fragment, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRouter from './components/Routers/AppRouter';
 import Notification from './components/UI/Notification/Notification';
 import { RootState } from './store';
+import { uiActions } from './store/ui-slice';
 
 function App() {
+  const dispatch = useDispatch();
   const notification = useSelector((state: RootState) => state.ui.notifcation);
-  const isNotification = notification.message.length !== 0 && notification.status.length !== 0 && notification.title.length !== 0;
+  const isNotification = !!notification.message && !!notification.status && !!notification.title;
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(uiActions.clearNotification());
+    }, 3000);
+  }, [isNotification]);
+
   return (
     <Fragment>
       {isNotification && <Notification status={notification.status} message={notification.message} title={notification.title} />}
