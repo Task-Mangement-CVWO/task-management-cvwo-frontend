@@ -15,7 +15,7 @@ const Tags: React.FC<{
     <div className={classes.tagContainer}>
       <ul>
         {props.items.map(tagItem => (
-          <TagItem key={tagItem.id} val={tagItem.id || -1} title={tagItem.title || ''} />
+          <TagItem key={tagItem.id} tag_id={{ id: tagItem.id || -1 }} title={tagItem.title || ''} />
         ))}
       </ul>
     </div>

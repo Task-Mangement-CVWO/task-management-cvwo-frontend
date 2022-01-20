@@ -4,7 +4,7 @@ import { taskActions } from '../../store/task-slice';
 import { RootState } from '../../store';
 import classes from './TagItem.module.css';
 
-const TagItem: React.FC<{ title: string; val: number }> = props => {
+const TagItem: React.FC<{ title: string; tag_id: { id: number } }> = props => {
   const dispatch = useDispatch();
   const filters = useSelector((state: RootState) => state.task.filters);
   let filtersArr = [...filters];
@@ -13,12 +13,12 @@ const TagItem: React.FC<{ title: string; val: number }> = props => {
   const setActiveHandler = () => {
     setIsActive(state => !state);
 
-    if (!filtersArr.includes(props.val) && !isActive) {
-      filtersArr.push(props.val);
+    if (!filtersArr.includes(props.tag_id.id) && !isActive) {
+      filtersArr.push(props.tag_id.id);
       dispatch(taskActions.updateFilters({ data: filtersArr }));
     }
     if (isActive) {
-      filtersArr = [...filtersArr.filter(e => e !== props.val)];
+      filtersArr = [...filtersArr.filter(e => e !== props.tag_id.id)];
       dispatch(taskActions.updateFilters({ data: filtersArr }));
     }
   };

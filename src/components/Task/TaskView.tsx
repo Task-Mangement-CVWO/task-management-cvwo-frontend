@@ -76,6 +76,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
           {toDoArray.map(item => (
             <TaskItem
               key={item.id}
+              task_id={{ id: item.id || -1 }}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
               title={item.title || ''}
@@ -88,6 +89,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
           {inProgressArray.map(item => (
             <TaskItem
               key={item.id}
+              task_id={{ id: item.id || -1 }}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
               title={item.title || ''}
@@ -99,6 +101,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
           {completedArray.map(item => (
             <TaskItem
               key={item.id}
+              task_id={{ id: item.id || -1 }}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
               title={item.title || ''}
