@@ -2,18 +2,21 @@ import React from 'react';
 import TagItem from './TagItem';
 import classes from './Tags.module.css';
 
-const Tags = () => {
+const Tags: React.FC<{
+  items: {
+    id?: number;
+    title?: string;
+    user_id?: number;
+    created_at?: string;
+    updated_at?: string;
+  }[];
+}> = props => {
   return (
     <div className={classes.tagContainer}>
       <ul>
-        <TagItem title={'DSC'} />
-        <TagItem title={'CP3108'} />
-        <TagItem title={'ST2131'} />
-        <TagItem title={'CS2030S'} />
-        <TagItem title={'CS2040S'} />
-        <TagItem title={'MA2001'} />
-        <TagItem title={'GESS1002'} />
-        <TagItem title={'GEX1007'} />
+        {props.items.map(tagItem => (
+          <TagItem key={tagItem.id} val={tagItem.id || -1} title={tagItem.title || ''} />
+        ))}
       </ul>
     </div>
   );

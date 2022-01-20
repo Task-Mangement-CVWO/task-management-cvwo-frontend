@@ -1,15 +1,17 @@
 import React from 'react';
 import classes from './SideNav.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { authActions } from '../../store/auth-slice';
 import { uiActions } from '../../store/ui-slice';
 import { faTasks, faSignOutAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import Tags from './Tags';
+import { RootState } from '../../store';
 
 const SideNav: React.FC<{ onShowAddTag: () => void }> = props => {
   const dispatch = useDispatch();
+  const tags = useSelector((state: RootState) => state.task.tags);
   const history = useHistory();
   const logoutHandler = () => {
     dispatch(authActions.logout());
@@ -25,8 +27,7 @@ const SideNav: React.FC<{ onShowAddTag: () => void }> = props => {
       <div onClick={props.onShowAddTag} className={`${classes.sideNavButton} ${classes.addTag}`}>
         <FontAwesomeIcon icon={faPlusCircle} size='1x' /> &nbsp;&nbsp; Add Tag
       </div>
-      <Tags />
-
+      <Tags items={tags} />
       <div onClick={logoutHandler} className={`${classes.sideNavButton} ${classes.logout}`}>
         <FontAwesomeIcon icon={faSignOutAlt} size='1x' /> &nbsp;&nbsp; Logout
       </div>
