@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddTaskButton from '../AddTaskButton/AddTaskButton';
 import Search from '../Search/Search';
 import TaskCard from './TaskCard';
@@ -6,6 +6,7 @@ import TaskItem from './TaskItem/TaskItem';
 import classes from './TaskView.module.css';
 import Routes from '../../utilities/routes';
 import moment from 'moment';
+import _ from 'lodash';
 
 import { RootState } from '../../store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,12 +21,23 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
   const callUpdate = useSelector((state: RootState) => state.task.callUpdate);
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
+  const [sortBy, setSortBy] = useState<string>('');
+
   const filteredTasks = taskTagItems.filter(item => filters.includes(item.tag_id || -1));
   const filteredTaskIds = filteredTasks.map(item => item.task_id);
 
-  const toDoArray = taskItems.filter(item => item.state == 'To Do' && (filteredTaskIds.includes(item.id) || !filters.length));
-  const inProgressArray = taskItems.filter(item => item.state == 'In Progress' && (filteredTaskIds.includes(item.id) || !filters.length));
-  const completedArray = taskItems.filter(item => item.state == 'Completed' && (filteredTaskIds.includes(item.id) || !filters.length));
+  let toDoArray = taskItems.filter(item => item.state == 'To Do' && (filteredTaskIds.includes(item.id) || !filters.length));
+  let inProgressArray = taskItems.filter(item => item.state == 'In Progress' && (filteredTaskIds.includes(item.id) || !filters.length));
+  let completedArray = taskItems.filter(item => item.state == 'Completed' && (filteredTaskIds.includes(item.id) || !filters.length));
+
+  const sortKey = sortBy.length !== 0 ? sortBy : 'dueDate';
+  toDoArray = _.sortBy(toDoArray, [sortKey]);
+  inProgressArray = _.sortBy(inProgressArray, [sortKey]);
+  completedArray = _.sortBy(completedArray, [sortKey]);
+
+  const handelSortBy = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(event.target.value);
+  };
 
   const getTasks = async () => {
     const response = await fetch(Routes.url + '/tasks', {
@@ -83,7 +95,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
         <div className={classes.addAndSearch}>
           <AddTaskButton onShowAddTask={props.onShowAddTask} />
           <Search />
-          <select>
+          <select onChange={handelSortBy}>
             <option selected disabled hidden>
               Sort
             </option>
