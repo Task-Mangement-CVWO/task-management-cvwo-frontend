@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './TagItem.module.css';
 
-const TagItem = () => {
-  return <div className={classes.tag}>CS2030S</div>;
+const TagItem: React.FC<{ title: string }> = props => {
+  return <div className={classes.tag}>{props.title}</div>;
 };
 
 export default TagItem;
