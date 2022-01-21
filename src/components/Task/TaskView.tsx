@@ -7,6 +7,7 @@ import TaskItem from './TaskItem/TaskItem';
 import classes from './TaskView.module.css';
 import Routes from '../../utilities/routes';
 import moment from 'moment';
+import JwtUtils from '../../utilities/jwt';
 import _ from 'lodash';
 
 import { RootState } from '../../store';
@@ -76,6 +77,20 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
     return response;
   };
 
+  const updateCalendar = async (data: unknown, username: string) => {
+    const response = await fetch(Routes.calendarUrl + '/cvwo/api/createCalendar/submitData', {
+      method: 'POST',
+      body: JSON.stringify({
+        userName: username,
+        data: data,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response;
+  };
+
   useEffect(() => {
     (async () => {
       console.log('Calling Update');
@@ -84,6 +99,10 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
 
       const taskResponse = await getTasks();
       const taskData = await taskResponse.json();
+
+      const userName = await JwtUtils.getPayload(accessToken).username;
+      const calendarResponse = await updateCalendar(taskData.data, userName);
+      console.log(await calendarResponse.json());
 
       if (callUpdate.isTagDelete) {
         dispatch(taskActions.updateTasks({ data: taskData.data }));
