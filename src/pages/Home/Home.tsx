@@ -4,6 +4,7 @@ import MainBody from '../../components/UI/MainBody/MainBody';
 import TaskView from '../../components/Task/TaskView';
 import AddTask from '../../components/Task/AddTask/AddTask';
 import AddTag from '../../components/AddTag/AddTag';
+import AddCalendar from '../../components/AddCalendar/AddCalendar';
 
 function Home() {
   const [addTaskShown, setAddTaskShown] = useState<boolean>(false);
@@ -35,6 +36,7 @@ function Home() {
     <MainBody>
       {addTagShown && <AddTag onCancel={hideAddTagHandler} />}
       {addTaskShown && <AddTask onCancel={hideAddTaskHandler} />}
+      {addCalendarShown && <AddCalendar onCancel={hideAddCalendarHandler} />}
       <SideNav onAddCalendar={showAddCalendarHandler} onShowAddTag={showAddTagHandler} />
       <TaskView onShowAddTask={showAddTaskHandler} />
     </MainBody>
