@@ -134,11 +134,10 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
     const dateTimeValue = dateTimeInput.current!.value;
 
     const isTaskValue = taskValue.length !== 0;
-    const isDescriptionValue = descriptionValue.length !== 0;
     const isStateValue = stateValue.length !== 0;
     const isDateTimeValue = moment(dateTimeValue).isValid();
 
-    if (!isTaskValue || !isDescriptionValue || !isStateValue || !isDateTimeValue) {
+    if (!isTaskValue || !isStateValue || !isDateTimeValue) {
       dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be empty', title: 'Error' }));
       return;
     }
