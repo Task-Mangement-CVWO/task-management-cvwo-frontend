@@ -1,5 +1,6 @@
 .tagContainer {
-  height: 65%;
+  height: 59%;
+  background-color: aqua;
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
