@@ -4,11 +4,11 @@ import { taskActions } from '../../../store/task-slice';
 import { RootState } from '../../../store';
 import classes from './TagItem.module.css';
 
-const TagItem: React.FC<{ title: string; tag_id: { id: number } }> = props => {
+const TagItem: React.FC<{ title: string; tag_id: { id: number }; selected: boolean }> = props => {
   const dispatch = useDispatch();
   const taskTags = useSelector((state: RootState) => state.task.addTaskTags);
   let taskTagsArr = [...taskTags];
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(props.selected);
 
   const setActiveHandler = () => {
     setIsActive(state => !state);

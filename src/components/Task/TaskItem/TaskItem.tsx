@@ -27,6 +27,7 @@ const TaskItem: React.FC<{
     created_at?: string;
     updated_at?: string;
   }[];
+  onEditTask: () => void;
 }> = props => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
@@ -56,8 +57,16 @@ const TaskItem: React.FC<{
     return;
   };
 
+  const onEditHandler = async () => {
+    dispatch(taskActions.updateIsEditingTask({ data: { isEditingTask: true, taskId: props.task_id.id } }));
+    const selectedTagObjs = props.task_tags.filter(tagItem => tagItem.task_id === props.task_id.id);
+    const selectedTags = selectedTagObjs.map(tagItem => tagItem.tag_id);
+    dispatch(taskActions.updateAddTaskTags({ data: selectedTags }));
+    props.onEditTask();
+  };
+
   return (
-    <li className={classes.container}>
+    <li onClick={onEditHandler} className={classes.container}>
       <div onClick={handleDelete} className={classes.delete}>
         -
       </div>

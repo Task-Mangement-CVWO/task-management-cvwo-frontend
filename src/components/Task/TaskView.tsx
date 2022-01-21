@@ -117,6 +117,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
         <TaskCard noOfTask={toDoArray.length} state='To do'>
           {toDoArray.map(item => (
             <TaskItem
+              onEditTask={props.onShowAddTask}
               key={item.id}
               due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
@@ -131,6 +132,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
         <TaskCard noOfTask={inProgressArray.length} state='In progress'>
           {inProgressArray.map(item => (
             <TaskItem
+              onEditTask={props.onShowAddTask}
               key={item.id}
               due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
@@ -144,6 +146,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
         <TaskCard noOfTask={completedArray.length} state='Completed'>
           {completedArray.map(item => (
             <TaskItem
+              onEditTask={props.onShowAddTask}
               key={item.id}
               due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}

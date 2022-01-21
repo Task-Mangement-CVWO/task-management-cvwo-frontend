@@ -32,6 +32,10 @@ interface SliceState {
     isUpdate: boolean;
     isTagDelete: boolean;
   };
+  editingTask: {
+    isEditingTask: boolean;
+    taskId: number;
+  };
 }
 
 const initialState: SliceState = {
@@ -71,6 +75,10 @@ const initialState: SliceState = {
     isUpdate: false,
     isTagDelete: false,
   },
+  editingTask: {
+    isEditingTask: false,
+    taskId: -1,
+  },
 };
 
 const taskSlice = createSlice({
@@ -94,6 +102,9 @@ const taskSlice = createSlice({
     },
     callUpdate(state, action) {
       state.callUpdate = action.payload.data;
+    },
+    updateIsEditingTask(state, action) {
+      state.editingTask = action.payload.data;
     },
   },
 });
