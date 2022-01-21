@@ -43,6 +43,7 @@ body::-webkit-scrollbar {
 
 .submitForm p {
   font-size: 12px;
+  margin-bottom: 10px;
 }
 
 .form h1 {
