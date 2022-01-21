@@ -66,18 +66,20 @@ const TaskItem: React.FC<{
   };
 
   return (
-    <li onClick={onEditHandler} className={classes.container}>
+    <li className={classes.container}>
       <div onClick={handleDelete} className={classes.delete}>
         -
       </div>
-      <p>{props.title}</p>
-      <label>{props.description}</label>
-      <div className={classes.tags}>
-        {props.task_tags.map(item => (
-          <TagItem key={item.id} title={props.tags.filter(tagItem => tagItem.id == item.tag_id)[0].title || ''} />
-        ))}
+      <div onClick={onEditHandler}>
+        <p>{props.title}</p>
+        <label>{props.description}</label>
+        <div className={classes.tags}>
+          {props.task_tags.map(item => (
+            <TagItem key={item.id} title={props.tags.filter(tagItem => tagItem.id == item.tag_id)[0].title || ''} />
+          ))}
+        </div>
+        <div className={classes.dateTime}>{props.due_date}</div>
       </div>
-      <div className={classes.dateTime}>{props.due_date}</div>
     </li>
   );
 };
