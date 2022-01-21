@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { authActions } from '../../store/auth-slice';
 import { uiActions } from '../../store/ui-slice';
-import { faTasks, faSignOutAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTasks, faSignOutAlt, faPlusCircle, faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 import Tags from './Tags';
 import { RootState } from '../../store';
 
-const SideNav: React.FC<{ onShowAddTag: () => void }> = props => {
+const SideNav: React.FC<{ onShowAddTag: () => void; onAddCalendar: () => void }> = props => {
   const dispatch = useDispatch();
   const tags = useSelector((state: RootState) => state.task.tags);
   const history = useHistory();
@@ -25,7 +25,10 @@ const SideNav: React.FC<{ onShowAddTag: () => void }> = props => {
         <FontAwesomeIcon icon={faTasks} size='1x' /> &nbsp;&nbsp; All Tasks
       </div>
       <div onClick={props.onShowAddTag} className={`${classes.sideNavButton} ${classes.addTag}`}>
-        <FontAwesomeIcon icon={faPlusCircle} size='1x' /> &nbsp;&nbsp; Add Tag
+        <FontAwesomeIcon icon={faPlusCircle} size='1x' /> &nbsp;&nbsp; Add Tags
+      </div>
+      <div onClick={props.onAddCalendar} className={`${classes.sideNavButton} ${classes.subscribeTag}`}>
+        <FontAwesomeIcon icon={faCalendarPlus} size='1x' /> &nbsp;&nbsp; Subscribe
       </div>
       <Tags items={tags} />
       <div onClick={logoutHandler} className={`${classes.sideNavButton} ${classes.logout}`}>

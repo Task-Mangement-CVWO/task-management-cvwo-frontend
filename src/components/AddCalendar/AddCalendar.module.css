@@ -1,0 +1,44 @@
+.container {
+  background-color: #fcfcfc;
+  padding: 10px;
+  border-radius: 5px;
+  height: 400px;
+  overflow-y: auto;
+  background-color: #fcfcfc;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.container h1 {
+  font-family: AvenirNextDemiBold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.container label,
+p {
+  margin: 0;
+}
+
+.link {
+  color: #279d84;
+  font-size: 12px;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.tutorial p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.tutorial label {
+  font-family: AvenirNextIt;
+  font-size: 12px;
+}

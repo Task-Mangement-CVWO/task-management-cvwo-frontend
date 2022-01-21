@@ -12,8 +12,9 @@ import moment from 'moment';
 
 const AddTask: React.FC<{ onCancel: () => void }> = props => {
   const dispatch = useDispatch();
+  const offset = new Date().getTimezoneOffset();
 
-  let currentDate = new Date().toISOString().replace('Z', '');
+  let currentDate = moment(new Date()).subtract(offset, 'minutes').toISOString().replace('Z', '');
   currentDate = currentDate.substring(0, currentDate.indexOf('.') - 3);
 
   const [minDate, setMinDate] = useState(currentDate);
@@ -93,7 +94,7 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
       if (!onEdit.isEditingTask) {
         setDescriptionValue('');
         taskInput.current!.value = '';
-        stateInput.current!.value = '';
+        stateInput.current!.value = 'To Do';
         dateTimeInput.current!.value = '';
         dispatch(taskActions.updateAddTaskTags({ data: [] }));
         return;
@@ -101,16 +102,22 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
       dispatch(uiActions.showNotification({ status: 'pending', message: 'Fetching Data...', title: 'Pending' }));
       const response = await fetchTask(onEdit.taskId);
       const data = await response.json();
-      let dueDate = moment(data.data.dueDate).toISOString();
+      const currentDateTimeObj = moment(currentDate).add(offset, 'minutes');
+      const taskDateTimeObj = moment(data.data.dueDate);
+      let minDate = moment.min(taskDateTimeObj, currentDateTimeObj).subtract(offset, 'minutes').toISOString();
+      minDate = minDate.replace('Z', '');
+      minDate = minDate.substring(0, minDate.indexOf('.') - 3);
+      setMinDate(minDate);
 
-      dueDate = dueDate.replace('Z', '');
-      dueDate = dueDate.substring(0, dueDate.indexOf('.') - 3);
-      setMinDate(dueDate);
+      let taskDueDate =
+        currentDateTimeObj > taskDateTimeObj ? taskDateTimeObj.toISOString() : taskDateTimeObj.subtract(offset, 'minutes').toISOString();
+      taskDueDate = taskDueDate.replace('Z', '');
+      taskDueDate = taskDueDate.substring(0, taskDueDate.indexOf('.') - 3);
 
       setDescriptionValue(data.data.description);
       taskInput.current!.value = data.data.title;
       stateInput.current!.value = data.data.state;
-      dateTimeInput.current!.value = dueDate;
+      dateTimeInput.current!.value = taskDueDate;
 
       dispatch(uiActions.showNotification({ status: 'success', message: 'Data Fetched', title: 'Success' }));
 
@@ -118,7 +125,7 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
         id: data.data.id,
         title: data.data.title,
         description: data.data.description,
-        dueDate: dueDate,
+        dueDate: taskDueDate,
         state: data.data.state,
       });
     })();
