@@ -33,6 +33,10 @@ const AddTag: React.FC<{ onCancel: () => void }> = props => {
       dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be empty', title: 'Error' }));
       return;
     }
+    if (title.trim().length > 10) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be greater than 10 Characters', title: 'Error' }));
+      return;
+    }
     const response = await addTag(title);
     if (!response.ok) {
       type error = { message: string };

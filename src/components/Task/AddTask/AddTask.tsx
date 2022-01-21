@@ -126,7 +126,9 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
 
   const onSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(uiActions.showNotification({ status: 'pending', message: 'Adding Task...', title: 'Pending' }));
+    const pendingTxt = onEdit.isEditingTask ? 'Editing Task...' : 'Adding Task...';
+    const successTxt = onEdit.isEditingTask ? 'Task Edited' : 'Task Added';
+    dispatch(uiActions.showNotification({ status: 'pending', message: pendingTxt, title: 'Pending' }));
     const taskValue = taskInput.current!.value;
     const stateValue = stateInput.current!.value;
     const dateTimeValue = dateTimeInput.current!.value;
@@ -149,10 +151,6 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
     const response = onEdit.isEditingTask
       ? await editTask(onEditFormValues.id, taskValue, descriptionValue, stateValue, dateTimeValue, chooseTags)
       : await addTask(taskValue, descriptionValue, stateValue, dateTimeValue, chooseTags);
-
-    if (onEdit.isEditingTask) {
-      dispatch(taskActions.updateIsEditingTask({ data: { isEditingTask: false, id: -1 } }));
-    }
     if (!response.ok) {
       type error = { message: string };
       const data = (await response.json()) as unknown as error;
@@ -160,8 +158,11 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
       dispatch(uiActions.showNotification({ status: 'error', message: data.message, title: 'Error' }));
       return;
     }
-    dispatch(uiActions.showNotification({ status: 'success', message: 'Tag Added!', title: 'Success' }));
+    dispatch(uiActions.showNotification({ status: 'success', message: successTxt, title: 'Success' }));
     dispatch(taskActions.callUpdate({ data: { isUpdate: true, isTagDelete: false } }));
+    if (onEdit.isEditingTask) {
+      dispatch(taskActions.updateIsEditingTask({ data: { isEditingTask: false, id: -1 } }));
+    }
     props.onCancel();
   };
   const descriptionHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
