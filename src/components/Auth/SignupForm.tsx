@@ -61,6 +61,7 @@ const SignupForm = () => {
       type error = { message: string };
       const data = (await response.json()) as unknown as error;
       dispatch(uiActions.showNotification({ status: 'error', message: data.message, title: 'Error' }));
+      return;
     }
 
     setUsernameInput('');
