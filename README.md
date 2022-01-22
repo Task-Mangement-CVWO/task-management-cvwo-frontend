@@ -4,6 +4,13 @@
 
 - [laughing-bassi-1b3575.netlify.app](https://laughing-bassi-1b3575.netlify.app)
 
+## Features
+- Account System across devices
+- Tagging
+- Deadlines
+- Subscription Calendar
+- Search and Sort
+
 ## Getting Started
 
 1. Install nvm on your machine
