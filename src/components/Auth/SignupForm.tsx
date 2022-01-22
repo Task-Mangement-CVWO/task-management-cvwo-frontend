@@ -51,12 +51,16 @@ const SignupForm = () => {
       dispatch(uiActions.showNotification({ status: 'error', message: 'Input cannot be empty', title: 'Error' }));
       return;
     }
+    if (usernameInput.trim().indexOf(' ') !== -1) {
+      dispatch(uiActions.showNotification({ status: 'error', message: 'Username cannot contain space', title: 'Error' }));
+      return;
+    }
     if (!isPasswordMatch) {
       dispatch(uiActions.showNotification({ status: 'error', message: 'Passwords do not match', title: 'Error' }));
       return;
     }
-
-    const response = await signUp(usernameInput, passwordInput, confirmPasswordInput);
+    const username = usernameInput.trim();
+    const response = await signUp(username, passwordInput, confirmPasswordInput);
     if (!response.ok) {
       type error = { message: string };
       const data = (await response.json()) as unknown as error;
