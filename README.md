@@ -2,7 +2,7 @@
 
 ## Deployment
 
-- [Task Manager app](https://laughing-bassi-1b3575.netlify.app)
+- [laughing-bassi-1b3575.netlify.app](https://laughing-bassi-1b3575.netlify.app)
 
 ## Getting Started
 
