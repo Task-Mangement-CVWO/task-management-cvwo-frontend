@@ -17,4 +17,5 @@
 2. Run `nvm install v14.17.6`
 3. Run `nvm use`
 4. Run `npm install` in the working directory to install required packages
-5. Run `npm run start` to run the app on localhost
+5. Copy `.env.example` and create your own enviroment variables
+6. Run `npm run start` to run the app on localhost
