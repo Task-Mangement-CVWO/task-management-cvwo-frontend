@@ -4,8 +4,8 @@ const Routes = {
     login: '/user/login',
     signup: '/user/signup',
   },
-  url: 'https://tm-cvwo-api.herokuapp.com',
-  calendarUrl: 'https://shro-tracker.me',
+  url: process.env.REACT_APP_BACKEND_API_URL,
+  calendarUrl: process.env.REACT_APP_CALENDAR_API_URL,
 };
 
 export default Routes;
