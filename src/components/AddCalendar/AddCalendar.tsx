@@ -41,7 +41,7 @@ const AddCalendar: React.FC<{ onCancel: () => void }> = props => {
           <img src={stepTwoImg} width={'100%'} />
 
           <p>Step 3</p>
-          <label>Pick and choose your options. Below is the recommended options.</label>
+          <label>Pick and choose your options. Below are the recommended options.</label>
           <img src={stepThreeImg} width={'100%'} />
         </div>
       </div>
