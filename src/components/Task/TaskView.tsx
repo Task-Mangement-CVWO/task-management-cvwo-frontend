@@ -101,7 +101,8 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
       const taskData = await taskResponse.json();
 
       const userName = await JwtUtils.getPayload(accessToken).username;
-      const calendarResponse = await updateCalendar(taskData.data, userName);
+      const calendarData = taskData.data.filter((item: { state: string }) => item.state !== 'Completed');
+      const calendarResponse = await updateCalendar(calendarData, userName);
       console.log(await calendarResponse.json());
 
       if (callUpdate.isTagDelete) {
