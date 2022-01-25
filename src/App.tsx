@@ -12,8 +12,9 @@ function App() {
   const isNotification = !!notification.message && !!notification.status && !!notification.title;
   useEffect(() => {
     setTimeout(() => {
+      console.log('clearing notification');
       dispatch(uiActions.clearNotification());
-    }, 3000);
+    }, 3500);
   }, [isNotification]);
 
   return (

@@ -38,9 +38,14 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
   inProgressArray = _.sortBy(inProgressArray, [sortKey]);
   completedArray = _.sortBy(completedArray, [sortKey]);
 
-  toDoArray = toDoArray.filter(item => item.title!.toUpperCase().includes(searchInput.toUpperCase()));
-  inProgressArray = inProgressArray.filter(item => item.title!.toUpperCase().includes(searchInput.toUpperCase()));
-  completedArray = completedArray.filter(item => item.title!.toUpperCase().includes(searchInput.toUpperCase()));
+  const searchFunction = (text: string): boolean => {
+    const isPresent = text.toUpperCase().includes(searchInput.toUpperCase());
+    return isPresent;
+  };
+
+  toDoArray = toDoArray.filter(item => searchFunction(item.title!) || searchFunction(item.description!));
+  inProgressArray = inProgressArray.filter(item => searchFunction(item.title!) || searchFunction(item.description!));
+  completedArray = completedArray.filter(item => searchFunction(item.title!) || searchFunction(item.description!));
 
   const handelSortBy = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(event.target.value);
@@ -141,6 +146,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
               key={item.id}
               due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
+              state={item.state || ''}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
               title={item.title || ''}
@@ -156,6 +162,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
               key={item.id}
               due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
+              state={item.state || ''}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
               title={item.title || ''}
@@ -170,6 +177,7 @@ const TaskView: React.FC<{ onShowAddTask: () => void }> = props => {
               key={item.id}
               due_date={convertISODate(item.dueDate || '')}
               task_id={{ id: item.id || -1 }}
+              state={item.state || ''}
               tags={tagItems}
               task_tags={taskTagItems.filter(tagItem => tagItem.task_id == item.id)}
               title={item.title || ''}

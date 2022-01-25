@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TagItem from './TagItem';
 import classes from './TaskItem.module.css';
 import Routes from '../../../utilities/routes';
@@ -11,6 +11,7 @@ const TaskItem: React.FC<{
   title: string;
   description: string;
   task_id: { id: number };
+  state: string;
   due_date: string;
   task_tags: {
     id?: number;
@@ -31,6 +32,7 @@ const TaskItem: React.FC<{
 }> = props => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  const [isComplete] = useState<boolean>(props.state === 'Completed');
 
   const deleteTask = async (id: number) => {
     const response = await fetch(Routes.url + '/tasks/' + id.toString(), {
@@ -71,7 +73,10 @@ const TaskItem: React.FC<{
         -
       </div>
       <div onClick={onEditHandler}>
-        <p>{props.title}</p>
+        <p>
+          {isComplete && <del>{props.title}</del>}
+          {!isComplete && props.title}
+        </p>
         <label>{props.description}</label>
         <div className={classes.tags}>
           {props.task_tags.map(item => (

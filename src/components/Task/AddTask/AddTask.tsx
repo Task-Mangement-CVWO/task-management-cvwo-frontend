@@ -14,11 +14,6 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
   const dispatch = useDispatch();
   const offset = new Date().getTimezoneOffset();
 
-  let currentDate = moment(new Date()).subtract(offset, 'minutes').toISOString().replace('Z', '');
-  currentDate = currentDate.substring(0, currentDate.indexOf('.') - 3);
-
-  const [minDate, setMinDate] = useState(currentDate);
-
   const taskInput = useRef<HTMLInputElement>(null);
   const [descriptionValue, setDescriptionValue] = useState<string>('');
   const stateInput = useRef<HTMLSelectElement>(null);
@@ -102,15 +97,9 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
       dispatch(uiActions.showNotification({ status: 'pending', message: 'Fetching Data...', title: 'Pending' }));
       const response = await fetchTask(onEdit.taskId);
       const data = await response.json();
-      const currentDateTimeObj = moment(currentDate).add(offset, 'minutes');
       const taskDateTimeObj = moment(data.data.dueDate);
-      let minDate = moment.min(taskDateTimeObj, currentDateTimeObj).subtract(offset, 'minutes').toISOString();
-      minDate = minDate.replace('Z', '');
-      minDate = minDate.substring(0, minDate.indexOf('.') - 3);
-      setMinDate(minDate);
 
-      let taskDueDate =
-        currentDateTimeObj > taskDateTimeObj ? taskDateTimeObj.toISOString() : taskDateTimeObj.subtract(offset, 'minutes').toISOString();
+      let taskDueDate = taskDateTimeObj.subtract(offset, 'minutes').toISOString();
       taskDueDate = taskDueDate.replace('Z', '');
       taskDueDate = taskDueDate.substring(0, taskDueDate.indexOf('.') - 3);
 
@@ -195,7 +184,7 @@ const AddTask: React.FC<{ onCancel: () => void }> = props => {
           <option value='Completed'>Completed</option>
         </select>
         <label>Due Date (date and time):</label>
-        <input ref={dateTimeInput} min={minDate} type='datetime-local' />
+        <input ref={dateTimeInput} type='datetime-local' />
         <div className={classes.submitForm}>
           <button className={classes.add} type='submit'>
             Submit
