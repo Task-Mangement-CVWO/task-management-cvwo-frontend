@@ -7,7 +7,6 @@ import TaskItem from './TaskItem/TaskItem';
 import classes from './TaskView.module.css';
 import Routes from '../../utilities/routes';
 import moment from 'moment';
-import JwtUtils from '../../utilities/jwt';
 import _ from 'lodash';
 
 import { RootState } from '../../store';
